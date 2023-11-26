@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1><i>INGRESAR</i></h1>
+<p style="color: rgb(107, 33, 33);">
+    <b>{{ error }}</b>
+</p>
+<form action="{% url 'sign-up' %}" method="post">
+    {% csrf_token %}
+    
+    {{ form_sign_up.as_p}}
+
+    <button>Enviar</button>
+</form>
+{% endblock content %}

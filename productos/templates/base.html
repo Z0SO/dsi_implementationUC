@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TPI Diseño</title>
+</head>
+<body>
+
+    <nav>
+        <ul>
+            
+            <li>
+                <a href="{% url 'home' %}">Home</a>
+            </li>
+
+
+            <!-- si el usuario esta autenticado que muestre estas opciones de navegacion -->
+            {% if user.is_authenticated %}
+            <li>
+                <a href="{% url 'productos' %}">Productos</a>
+            </li>
+            <li>
+                <a href="{% url 'productos' %}">Agregar Producto</a>
+            </li>
+            <li>
+                <a href="{% url 'log-out'%}">Salir</a>
+            </li>
+            
+            {% else %}
+            <li>
+                <a href="{% url 'log-in' %}">Ingresar</a>
+            </li>
+            <li>
+                <a href="{% url 'sign-up' %}">Registrarse</a>
+            </li>
+            {% endif %}
+            
+
+        </ul>
+    </nav>
+
+
+    {% block content %}
+    {% endblock content %}    
+
+
+</body>
+</html>

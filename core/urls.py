@@ -18,11 +18,22 @@ from django.contrib import admin
 from django.urls import path
 from productos import views
 
+from django.conf import settings
+from django.conf.urls.static import static
+
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.home, name='home'),
-    path('sign-up/', views.sign_up , name='sign-up'),
+    #path('log-in', views.log_in, name='log-in'),
+    path('', views.log_in, name='log-in'),
+    #path('sign-up/', views.sign_up , name='sign-up'),
     path('productos/', views.productos, name='productos'),
     path('log-out/', views.sign_out, name='log-out'),
-    path('log-in', views.log_in, name='log-in')
+    path('registrarse/', views.registrarse, name='registrarse'),
+    path('producto_nuevo/', views.crear_producto, name='nuevo_producto'),
+    path('lista_productos/', views.lista_productos, name='lista_productos'),
+    path('producto/<int:prod_id>/', views.detalle_prod, name='detalle_prod'),
 ]
+
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

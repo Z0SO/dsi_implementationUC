@@ -12,7 +12,8 @@ from django.contrib.auth import login, logout, authenticate
 from django.http import HttpResponse
 
 
-
+from .forms import ProductosForm
+from .models import Productos
 
 
 
@@ -89,7 +90,7 @@ def log_in(request):
             )
         else:
             login(request, usuario)
-            return redirect('home')
+            return redirect('lista_productos')
         
 
     
@@ -100,7 +101,7 @@ def log_in(request):
 
 def sign_out(request):
     logout(request)
-    return redirect('home')
+    return redirect('log-in')
 
 
 
@@ -116,7 +117,43 @@ def productos(request):
     return render(request, 'productos.html')
 
 
+def registrarse(request):
+    if request.method == 'GET':
+        return render(request, 'registrarse.html', {"form": UserCreationForm})
+    else:
+
+        if request.POST["password1"] == request.POST["password2"]:
+            try:
+                user = User.objects.create_user(
+                    request.POST["username"], password=request.POST["password1"])
+                user.save()
+                login(request, user)
+                return redirect('productos')
+            except IntegrityError:
+                return render(request, 'registrarse.html', {"form": UserCreationForm, "error": "Username already exists."})
+
+        return render(request, 'registrarse.html', {"form": UserCreationForm, "error": "Passwords did not match."})
 
 
 
+def crear_producto(request):
+    if request.method == "GET":
+        return render(request, 'crear_producto.html', {"form": ProductosForm})
+    else:
+        try:
+            form = ProductosForm(request.POST, request.FILES)
+            nuevo_producto = form.save(commit=False)
+            nuevo_producto.save()
+            return redirect('productos')
+        except ValueError:
+            return render(request, 'Productos.html', {"form": ProductosForm, "error": "Error creando producto."})
 
+
+def lista_productos(request):
+    lista = Productos.objects.all
+    return render(request, 'lista_productos.html', {"lista": lista})
+
+
+def detalle_prod(request, prod_id):
+    prod = Productos.objects.get(pk=prod_id)
+    return render(request, 'detalle_producto.html' , {'prod': prod})

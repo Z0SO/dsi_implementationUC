@@ -1,49 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>TPI Diseño</title>
-</head>
-<body>
-
-    <nav>
-        <ul>
-            
-            <li>
-                <a href="{% url 'home' %}">Home</a>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
+    />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container">
+        <a class="navbar-brand" href="/">Navbar</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a href="/" class="nav-link">Home</a>
             </li>
-
-
-            <!-- si el usuario esta autenticado que muestre estas opciones de navegacion -->
             {% if user.is_authenticated %}
-            <li>
-                <a href="{% url 'productos' %}">Productos</a>
+            <li class="nav-item">
+              <a href="{% url 'lista_productos' %}" class="nav-link"
+                >Catalogo</a
+              >
             </li>
-            <li>
-                <a href="{% url 'productos' %}">Agregar Producto</a>
+            <li class="nav-item">
+              <a href="{% url 'nuevo_producto' %}" class="nav-link"
+                >Agregar Producto</a
+              >
             </li>
-            <li>
-                <a href="{% url 'log-out'%}">Salir</a>
+            <li class="nav-item">
+              <a href="{% url 'log-out'%}" class="nav-link">Salir</a>
             </li>
-            
             {% else %}
-            <li>
-                <a href="{% url 'log-in' %}">Ingresar</a>
+            <li class="nav-item">
+              <a href="{% url 'log-in' %}" class="nav-link">Ingresar</a>
             </li>
-            <li>
-                <a href="{% url 'sign-up' %}">Registrarse</a>
+            <li class="nav-item">
+              <a href="{% url 'registrarse' %}" class="nav-link">Registrarse</a>
             </li>
             {% endif %}
-            
-
-        </ul>
+          </ul>
+        </div>
+      </div>
     </nav>
 
-
-    {% block content %}
-    {% endblock content %}    
-
-
-</body>
+    {% block content %} {% endblock content %}
+  </body>
 </html>

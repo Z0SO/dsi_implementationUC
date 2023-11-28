@@ -1,0 +1,69 @@
+{% extends 'base.html' %} {% block content %}
+
+<div class="py-5">
+  <div class="container text-center">
+    <div class="row">
+      <div class="col">
+        <h6>ID producto</h6>
+        <h5>{{prod.id}}</h5>
+      </div>
+      <div class="col">
+        <h6>Nombre producto</h6>
+        <h5>{{prod.nombre}}</h5>
+      </div>
+      <div class="col">
+        <h6>Cantidad producto</h6>
+        <h5>{{prod.cantidad}}</h5>
+      </div>
+    </div>
+    <div class="row py-5">
+      <div class="col">
+        <h6>Descripcion del producto</h6>
+        {{prod.descripcion}}
+      </div>
+    </div>
+    <div class="row py-5">
+      <div class="col">
+        <h6>Fecha de inicio</h6>
+        <h5>{{prod.fecha_inicio}}</h5>
+      </div>
+      <div class="col">
+        <h6>Fecha de fin</h6>
+        <h5>{{prod.fecha_fin}}</h5>
+      </div>
+    </div>
+    <div class="row py-5">
+      <div class="col">
+        <h6>Imagen del producto</h6>
+        {% if prod.imagen %}
+        <img
+          src="{{ prod.imagen.url }}"
+          alt="{{ prod.nombre }}"
+          class="img-fluid"
+        />
+        {% else %}
+        <p>No hay imagen disponible</p>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+{{error}}
+
+<form method="POST">
+  {% csrf_token %} {{form.as_p}}
+
+  <button>Update</button>
+</form>
+
+<form action="" method="POST">
+  {% csrf_token %}
+  <button>complete</button>
+</form>
+
+<form action="" method="POST">
+  {% csrf_token %}
+  <button>delete</button>
+</form>
+
+{% endblock %}

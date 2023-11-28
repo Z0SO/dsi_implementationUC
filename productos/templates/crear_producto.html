@@ -1,0 +1,20 @@
+{% extends 'base.html' %} {% block content %}
+
+<h1>Nuevo Producto</h1>
+
+{{error}}
+<form action="" method="POST" enctype="multipart/form-data">
+  {% csrf_token %} {{form}}
+
+  <button>Guardar</button>
+</form>
+
+{% if form.instance.imagen %}
+<div style="max-width: 20px; max-height: 20px; margin-top: 20px">
+  <img
+    src="{{ form.instance.imagen.url }}"
+    alt="{{ form.instance.nombre }}"
+    style="width: 20px; height: 20px"
+  />
+</div>
+{% endif %} {% endblock %}

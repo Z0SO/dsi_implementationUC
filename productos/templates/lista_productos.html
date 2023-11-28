@@ -1,0 +1,26 @@
+{% extends 'base.html' %} {% block content %}
+
+<h1>Lista de Productos</h1>
+
+<ul>
+  {% for prod in lista %}
+  <li>
+    <main class="conteiner py-5">
+      <section class="card card-body">
+        <a href="{% url 'detalle_prod' prod.id %}">
+          {% if prod.cantidad == none %}
+          <h5 class="text-danger"><strong>{{prod.nombre}}</strong></h5>
+          {% else %}
+          <h5>{{prod.id}} {{prod.nombre}} {{prod.cantidad}}</h5>
+          {% endif %}
+          <p>{{prod.descripcion}}</p>
+
+          {{prod.fecha_inicio|date:'M j Y:i'}}
+        </a>
+      </section>
+    </main>
+  </li>
+  {% endfor %}
+</ul>
+
+{% endblock %}

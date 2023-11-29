@@ -1,20 +1,116 @@
 {% extends 'base.html' %} {% block content %}
+<main class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card" style="border-color: #198754">
+        <div class="card-header text-white" style="background-color: #198754">
+          <h1 class="card-title mb-0">Nuevo Producto</h1>
+        </div>
+        <div class="card-body">
+          {{ error }}
+          <form action="" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="row g-3">
+              <div class="col-md-6">
+                <div class="mb-3">
+                  <label for="id_nombre" class="form-label">Nombre</label>
+                  <input
+                    type="text"
+                    id="id_nombre"
+                    name="nombre"
+                    class="form-control"
+                  />
+                </div>
 
-<h1>Nuevo Producto</h1>
+                <!-- es el input del campo tipo -->
+                <div class="col-md-6">
+                  <div class="mb-3">
+                    <label for="id_tipo" class="form-label">Tipo</label>
+                    <select id="id_tipo" name="tipo" class="form-select">
+                      <option value="" selected disabled>
+                        Selecciona un tipo
+                      </option>
+                      {% for choice in form.tipo.field.choices %}
+                      <option value="{{ choice.0 }}">{{ choice.1 }}</option>
+                      {% endfor %}
+                    </select>
+                  </div>
+                </div>
+                <!-- fin del input tipo -->
 
-{{error}}
-<form action="" method="POST" enctype="multipart/form-data">
-  {% csrf_token %} {{form}}
+                <div class="mb-3">
+                  <label for="id_fecha_fin" class="form-label"
+                    >Fecha de Fin</label
+                  >
+                  <input
+                    type="date"
+                    id="id_fecha_fin"
+                    name="fecha_fin"
+                    class="form-control"
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="id_cantidad" class="form-label">Cantidad</label>
+                  <input
+                    type="number"
+                    id="id_cantidad"
+                    name="cantidad"
+                    class="form-control"
+                    oninput="validarCantidad(this)"
+                  />
 
-  <button>Guardar</button>
-</form>
-
-{% if form.instance.imagen %}
-<div style="max-width: 20px; max-height: 20px; margin-top: 20px">
-  <img
-    src="{{ form.instance.imagen.url }}"
-    alt="{{ form.instance.nombre }}"
-    style="width: 20px; height: 20px"
-  />
-</div>
-{% endif %} {% endblock %}
+                  <!-- script para que no se ingresen numeros negativos -->                  
+                  <script>
+                    function validarCantidad(input) {
+                      if (input.value < 1) {
+                        input.value = 1; // Si el valor es negativo, establecerlo como cero
+                      }
+                    }
+                  </script>
+                
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="mb-3">
+                  <label for="descripcion" class="form-label"
+                    >Descripción del producto</label
+                  >
+                  <textarea
+                    id="descripcion"
+                    name="descripcion"
+                    rows="4"
+                    class="form-control"
+                    style="outline: solid 1px #198754"
+                  ></textarea>
+                </div>
+                <div class="mb-3">
+                  <label for="id_imagen" class="form-label">Imagen</label>
+                  <input
+                    type="file"
+                    id="id_imagen"
+                    name="imagen"
+                    class="form-control"
+                    style="
+                      border: solid 2px #198754;
+                      background-color: aliceblue;
+                    "
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="d-grid">
+              <button
+                type="submit"
+                class="btn btn-primary"
+                style="background-color: #198754; border: none"
+              >
+                Agregar Producto
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+{% endblock %}

@@ -5,14 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>TPI Diseño</title>
     <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
     />
   </head>
-  <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <body p style="font-family: 'Roboto', sans-serif">
+    <nav
+      class="navbar navbar-expand-lg navbar-dark"
+      style="background-color: #198754"
+    >
       <div class="container">
-        <a class="navbar-brand" href="/">Navbar</a>
+        {% if user.is_authenticated %}
+        <b class="navbar-brand">Reciplas</b>
+        {% else %}
+        <a class="navbar-brand" href="/"><b>Reciplas</b></a>
+        {% endif %}
+
         <button
           class="navbar-toggler"
           type="button"
@@ -26,22 +38,30 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav ms-auto">
-            <li class="nav-item">
-              <a href="/" class="nav-link">Home</a>
-            </li>
             {% if user.is_authenticated %}
             <li class="nav-item">
-              <a href="{% url 'lista_productos' %}" class="nav-link"
+              <a
+              href="{% url 'lista_productos' %}"
+              class="nav-link"
+              style="color: aliceblue"
                 >Catalogo</a
               >
             </li>
-            <li class="nav-item">
-              <a href="{% url 'nuevo_producto' %}" class="nav-link"
-                >Agregar Producto</a
+            <!-- <li class="nav-item">
+              <a
+              href="{% url 'nuevo_producto' %}"
+              class="nav-link"
+              style="color: aliceblue"
+              >Agregar Producto</a
               >
-            </li>
+            </li> -->
             <li class="nav-item">
-              <a href="{% url 'log-out'%}" class="nav-link">Salir</a>
+              <a
+              href="{% url 'log-out'%}"
+              class="nav-link"
+              style="color: aliceblue"
+              >Salir</a
+              >
             </li>
             {% else %}
             <li class="nav-item">

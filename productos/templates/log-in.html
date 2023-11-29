@@ -1,14 +1,43 @@
-{% extends 'base.html' %} {% block content %}
-<h1>Ingresar</h1>
+{% extends 'base.html' %}
 
-<span style="color: rgb(112, 22, 22)">
-  <b>{{ error }}</b>
-</span>
+{% block content %}
 
-<form action="{% url 'log-in' %}" method="post">
-  {% csrf_token %} {{ form.as_p }}
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-6 offset-md-3">
+      <h1 class="text-center mb-4">Hola de nuevo!</h1>
 
-  <button>Ingresar</button>
-</form>
+      <div class="card">
+        <div class="card-body">
+          <span style="color: rgb(112, 22, 22)" class="text-danger">
+            <b>{{ error }}</b>
+          </span>
+          
+          <form action="{% url 'log-in' %}" method="post">
+            {% csrf_token %}
+            
+            <div class="mb-3">
+              <label for="username" class="form-label">Usuario</label>
+              <input type="text" name="username" id="usuario" class="form-control">
+            </div>
+            
+            <div class="mb-3">
+              <label for="password" class="form-label">Contraseña</label>    
+              <input type="password" name="password" id="password" class="form-control">
+            </div>
+            <div class="container mt-5">
+
+              <div class="d-grid">
+                <button class="btn btn-success">Ingresar</button>  
+              </div>
+            
+            </div>
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
 
 {% endblock content %}

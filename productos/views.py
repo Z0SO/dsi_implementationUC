@@ -76,7 +76,7 @@ def log_in(request):
         return render(request, 'log-in.html', { 'form': AuthenticationForm })
     else:
         # caso de que venga por otro metodo http
-        
+        print(request.POST)
         # se guarda en usuario el resultado de la autenticacion
         usuario = authenticate(request, 
             username= request.POST['username'],
@@ -125,7 +125,7 @@ def registrarse(request):
         if request.POST["password1"] == request.POST["password2"]:
             try:
                 user = User.objects.create_user(
-                    request.POST["username"], password=request.POST["password1"])
+                    username=request.POST["username"], password=request.POST["password1"])
                 user.save()
                 login(request, user)
                 return redirect('productos')

@@ -1,13 +1,68 @@
 {% extends 'base.html' %} {% block content %}
 
 <div class="container">
-  <h1>Signup</h1>
 
   {{error}}
 
-  <form action="/registrarse/" method="POST">
-    {% csrf_token %} {{form.as_p}}
-    <button class="btn btn-primary">Signup</button>
+  <form action="{% url 'registrarse' %}" method="POST">
+    {% csrf_token %}
+
+    <div class="container mt-5">
+      <div class="row">
+        <div class="col-md-6 offset-md-3">
+          <h1 class="text-center mb-4">Registrar un nuevo usuario</h1>
+
+          <div class="card" style="outline-color: #198754;">
+            <div class="card-body" style="outline-color: #198754;">
+              <span style="color: rgb(112, 22, 22)" class="text-danger">
+                <b>{{ error }}</b>
+              </span>
+
+              <form action="{% url 'log-in' %}" method="post">
+                {% csrf_token %}
+
+                <div class="mb-3">
+                  <label for="username" class="form-label">Nombre de usuario</label>
+                  <input
+                    type="text"
+                    name="username"
+                    id="usuario"
+                    class="form-control"
+                  />
+                </div>
+
+                <div class="mb-3">
+                  <label for="password" class="form-label">Ingrese una Contraseña</label>
+                  <input
+                    type="password"
+                    name="password1"
+                    id="password"
+                    class="form-control"
+                  />
+                </div>
+
+                <div class="mb-3">
+                  <label for="password" class="form-label">Repita la Contraseña</label>
+                  <input
+                    type="password"
+                    name="password2"
+                    id="password"
+                    class="form-control"
+                  />
+                </div>
+
+                <div class="container mt-5">
+                  <div class="d-grid">
+                    <button class="btn btn-success">Registrarse</button>
+                  </div>
+                </div>
+
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </form>
 </div>
 {% endblock %}

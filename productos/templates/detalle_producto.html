@@ -1,69 +1,61 @@
 {% extends 'base.html' %} {% block content %}
-
-<div class="py-5">
-  <div class="container text-center">
-    <div class="row">
-      <div class="col">
-        <h6>ID producto</h6>
-        <h5>{{prod.id}}</h5>
-      </div>
-      <div class="col">
-        <h6>Nombre producto</h6>
-        <h5>{{prod.nombre}}</h5>
-      </div>
-      <div class="col">
-        <h6>Cantidad producto</h6>
-        <h5>{{prod.cantidad}}</h5>
-      </div>
-    </div>
-    <div class="row py-5">
-      <div class="col">
-        <h6>Descripcion del producto</h6>
-        {{prod.descripcion}}
-      </div>
-    </div>
-    <div class="row py-5">
-      <div class="col">
-        <h6>Fecha de inicio</h6>
-        <h5>{{prod.fecha_inicio}}</h5>
-      </div>
-      <div class="col">
-        <h6>Fecha de fin</h6>
-        <h5>{{prod.fecha_fin}}</h5>
-      </div>
-    </div>
-    <div class="row py-5">
-      <div class="col">
-        <h6>Imagen del producto</h6>
-        {% if prod.imagen %}
-        <img
-          src="{{ prod.imagen.url }}"
-          alt="{{ prod.nombre }}"
-          class="img-fluid"
-        />
-        {% else %}
-        <p>No hay imagen disponible</p>
-        {% endif %}
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card" style="border: solid 2px #198754; border-radius: 10px">
+        <div class="card-header" style="background-color: #198754">
+          <h1 class="card-title text-white mb-0">Detalles del Producto</h1>
+        </div>
+        <div
+          class="card-body"
+          style="border-radius: 2px; border: solid 2px #198754"
+        >
+          <div class="row">
+            <div class="col-md-6">
+              <div class="mb-3">
+                <br />
+                {% if prod.imagen %}
+                <img
+                  src="{{ prod.imagen.url }}"
+                  alt="{{ prod.nombre }}"
+                  class="img-fluid rounded shadow"
+                  style="max-height: 300px"
+                />
+                {% else %}
+                <p class="text-muted">No hay imagen disponible</p>
+                {% endif %}
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="mb-3">
+                <h6>ID producto</h6>
+                <p class="fw-bold">{{ prod.id }}</p>
+              </div>
+              <div class="mb-3">
+                <h6>Nombre producto</h6>
+                <p class="fw-bold">{{ prod.nombre }}</p>
+              </div>
+              <div class="mb-3">
+                <h6>Cantidad producto</h6>
+                <p class="fw-bold">{{ prod.cantidad }}</p>
+              </div>
+              <div class="mb-3">
+                <h6>Descripción del producto</h6>
+                <p>{{ prod.descripcion }}</p>
+              </div>
+              <div class="mb-3">
+                <h6>Fecha de inicio</h6>
+                <p class="fw-bold">{{ prod.fecha_inicio }}</p>
+              </div>
+              <div class="mb-3">
+                <h6>Fecha de fin</h6>
+                <p class="fw-bold">{{ prod.fecha_fin }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </div>
-{{error}}
-
-<form method="POST">
-  {% csrf_token %} {{form.as_p}}
-
-  <button>Update</button>
-</form>
-
-<form action="" method="POST">
-  {% csrf_token %}
-  <button>complete</button>
-</form>
-
-<form action="" method="POST">
-  {% csrf_token %}
-  <button>delete</button>
-</form>
-
-{% endblock %}
+{{ error }} {% endblock %}
